@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none';">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA 3D Engine</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">N</div><div><strong>NOVA</strong><span>3D ENGINE <i>V0.1</i></span></div></div>
+      <div class="top-actions">
+        <button id="resetCamera" class="tool-button">⌖ <span>Reset camera</span></button>
+        <button id="wireframe" class="tool-button">◇ <span>Wireframe</span></button>
+        <button id="playButton" class="play-button">▶ <span>PLAY</span></button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="panel hierarchy">
+        <div class="panel-heading"><span>SCENE HIERARCHY</span><button class="icon-button" title="Scene">＋</button></div>
+        <div class="scene-root"><span class="chevron">⌄</span><span class="cube-icon">▦</span> Scene</div>
+        <div class="tree-item selected"><span class="tree-indent"></span><span class="object-icon">◈</span> Cube <span class="eye">●</span></div>
+        <div class="tree-item"><span class="tree-indent"></span><span class="object-icon cyan">◈</span> Cube 2</div>
+        <div class="tree-item"><span class="tree-indent"></span><span class="object-icon purple">◈</span> Cube 3</div>
+        <div class="tree-item"><span class="tree-indent"></span><span class="light-icon">☼</span> Directional Light</div>
+        <div class="tree-item"><span class="tree-indent"></span><span class="camera-icon">▣</span> Main Camera</div>
+        <div class="panel-foot">5 OBJECTS IN SCENE</div>
+      </aside>
+
+      <section class="viewport-column">
+        <div class="viewport-toolbar">
+          <div class="view-tabs"><span class="active">SCENE</span><span>GAME</span></div>
+          <div class="viewport-hints"><span>透 PERSPECTIVE</span><span>◉ LIT</span></div>
+        </div>
+        <div class="viewport-wrap" id="viewportWrap">
+          <canvas id="viewport" aria-label="NOVA 3D viewport"></canvas>
+          <div class="axis-widget"><span class="axis-y">Y</span><span class="axis-x">X</span><span class="axis-z">Z</span><div class="axis-center"></div></div>
+          <div class="viewport-status"><span class="live-dot"></span> REAL-TIME VIEWPORT <span id="renderMode">SOLID</span></div>
+          <div class="help-overlay" id="helpOverlay">
+            <strong>VIEWPORT CONTROLS</strong>
+            <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Move camera</span>
+            <span><kbd>Q</kbd><kbd>E</kbd> Down / up</span>
+            <span><kbd>Right mouse</kbd> Look around</span>
+            <span><kbd>Shift</kbd> Move faster</span>
+            <span class="help-note">Click and hold right mouse inside the viewport to look around.</span>
+          </div>
+          <div class="crosshair">＋</div>
+        </div>
+        <div class="bottom-bar"><span>SCENE: Untitled</span><span id="resolution">-- × --</span><span>WEBGL 2.0</span><span class="spacer"></span><span id="fps">FPS --</span><span id="frameTime">-- ms</span></div>
+      </section>
+
+      <aside class="panel inspector">
+        <div class="panel-heading"><span>INSPECTOR</span><span class="selection-tag">CUBE</span></div>
+        <div class="object-title"><div class="object-big-icon">◈</div><div><strong>Cube</strong><span>Mesh Renderer · Static</span></div></div>
+        <div class="section-title"><span>TRANSFORM</span><span>⌄</span></div>
+        <div class="property-label">POSITION</div>
+        <div class="vector-row"><label>X <input id="posX" type="number" step="0.1" value="0"></label><label>Y <input id="posY" type="number" step="0.1" value="0"></label><label>Z <input id="posZ" type="number" step="0.1" value="0"></label></div>
+        <div class="property-label">ROTATION</div>
+        <div class="vector-row"><label>X <input id="rotX" type="number" step="5" value="0"></label><label>Y <input id="rotY" type="number" step="5" value="25"></label><label>Z <input id="rotZ" type="number" step="5" value="0"></label></div>
+        <div class="property-label">SCALE</div>
+        <div class="vector-row"><label>X <input id="scaleX" type="number" step="0.1" value="1" min="0.1"></label><label>Y <input id="scaleY" type="number" step="0.1" value="1" min="0.1"></label><label>Z <input id="scaleZ" type="number" step="0.1" value="1" min="0.1"></label></div>
+        <div class="section-title material-title"><span>MATERIAL</span><span>⌄</span></div>
+        <div class="material-row"><div class="material-swatch"></div><div><strong>Nova Blue</strong><span>Standard material</span></div><span class="dots">•••</span></div>
+        <div class="section-title"><span>MESH FILTER</span><span>⌄</span></div>
+        <div class="mesh-info"><span>Geometry</span><strong>Cube (24 vertices)</strong></div>
+        <div class="inspector-note">Select an object to inspect its properties. V0.1 currently exposes the primary cube transform.</div>
+      </aside>
+    </main>
+
+    <footer class="statusbar"><span><i class="status-dot"></i> ENGINE READY</span><span>DIRECT WEBGL2 RENDERER</span><span class="spacer"></span><span>NOVA INTERNAL BUILD 0.1.0</span></footer>
+  </div>
+  <script src="dist-renderer/app.js"></script>
+</body>
+</html>

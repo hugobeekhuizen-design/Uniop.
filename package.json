@@ -1,0 +1,45 @@
+{
+  "name": "nova-3d-engine",
+  "version": "0.1.0",
+  "description": "NOVA 3D Engine - a from-scratch WebGL2 renderer in Electron",
+  "main": "main.js",
+  "scripts": {
+    "build:renderer": "esbuild src/app.js --bundle --outfile=dist-renderer/app.js",
+    "prestart": "npm run build:renderer",
+    "start": "electron .",
+    "predist": "npm run build:renderer",
+    "dist": "electron-builder --win portable nsis"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.12",
+    "esbuild": "^0.25.0"
+  },
+  "build": {
+    "appId": "com.nova.engine",
+    "productName": "NOVA 3D Engine",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "styles.css",
+      "dist-renderer/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "portable",
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

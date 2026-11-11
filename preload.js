@@ -1,0 +1,1 @@
+// Intentionally minimal. The renderer does not need Node.js access in V0.1.
